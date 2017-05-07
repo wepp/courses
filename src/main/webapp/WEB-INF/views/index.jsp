@@ -12,7 +12,7 @@ ${queryJsp.query}
 <spring:form method="post"  modelAttribute="queryJsp" action="search">
 
     Query: <spring:input path="query"/> <br/>
-    <spring:button>Next Page</spring:button>
+    <spring:button>Search</spring:button>
 
 </spring:form>
 

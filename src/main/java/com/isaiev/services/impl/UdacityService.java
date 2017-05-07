@@ -3,6 +3,7 @@ package com.isaiev.services.impl;
 import com.isaiev.entities.Course;
 import com.isaiev.parsers.JsonParser;
 import com.isaiev.parsers.UdacityParser;
+import com.isaiev.search.UdacitySearch;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,14 +22,23 @@ import java.util.ArrayList;
 public class UdacityService {
 
     private JsonParser parser = new UdacityParser();
+    private UdacitySearch search = new UdacitySearch();
+    private ArrayList <Course> udacityCourses = null;
 
     public ArrayList<Course> getAllCourses ()  {
+        if(udacityCourses!=null && !udacityCourses.isEmpty()){
+            return udacityCourses;
+        }
         RestTemplate restTemplate = new RestTemplate();
-        String result = readFile ("D:/udacityJson.txt", Charset.defaultCharset());
-        //String result = restTemplate.getForObject("https://www.udacity.com/public-api/v0/courses", String.class);
-        ArrayList<Course> courses = parser.parseJson(result);
-        System.out.println("courses.size() = "+courses.size());
-        return courses;
+        //String result = readFile ("D:/udacityJson.txt", Charset.defaultCharset());
+        String result = restTemplate.getForObject("https://www.udacity.com/public-api/v0/courses", String.class);
+        udacityCourses = parser.parseJson(result);
+        return udacityCourses;
+    }
+
+    public ArrayList<Course> getByQuery (String query){
+        getAllCourses ();
+        return search.searchCourses(query, udacityCourses);
     }
 
     private String readFile(String path, Charset encoding)

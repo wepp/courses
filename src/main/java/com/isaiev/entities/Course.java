@@ -1,8 +1,9 @@
 package com.isaiev.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Course {
+public class Course {
 
     protected String id;
     protected String name;
@@ -11,6 +12,16 @@ public abstract class Course {
     protected String description;
     protected Date startDate;
     protected String level;
+    private ArrayList<String> tracks;
+
+    public ArrayList<String> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(ArrayList<String> tracks) {
+        this.tracks = tracks;
+    }
+
 
     public String getId() {
         return id;
@@ -75,10 +86,9 @@ public abstract class Course {
     @Override
     public String toString() {
         return "Course{" +
-                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", link='" + link + '\'' +
-                //", description='" + description + '\'' +
+                ", tracks='" + tracks + '\'' +
                 '}';
     }
 

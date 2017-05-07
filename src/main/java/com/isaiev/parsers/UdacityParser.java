@@ -1,7 +1,6 @@
 package com.isaiev.parsers;
 
 import com.isaiev.entities.Course;
-import com.isaiev.entities.UdacityCourse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +14,7 @@ import java.util.Date;
 public class UdacityParser extends JsonParser{
 
     protected Course mapJsonToObject(JSONObject courseJson) throws JSONException {
-        UdacityCourse course = new UdacityCourse();
+        Course course = new Course();
         course.setId(courseJson.getString("key"));
         course.setName(courseJson.getString("title"));
         course.setPhotoUrl(courseJson.isNull("image") ?
@@ -25,7 +24,7 @@ public class UdacityParser extends JsonParser{
         JSONArray arr = courseJson.getJSONArray("tracks");
         ArrayList<String> tracks = new ArrayList<String>(arr.length());
         for (int i = 0; i < arr.length(); i++){
-            tracks.add(arr.getString(i));
+            tracks.add(arr.getString(i).toLowerCase());
         }
         course.setTracks(tracks);
         return course;

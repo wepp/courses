@@ -28,7 +28,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("queryJsp", new SearchQuery("Hello"));
+        modelAndView.addObject("queryJsp", new SearchQuery(""));
         modelAndView.setViewName("index");
         return modelAndView;
     }
@@ -37,7 +37,7 @@ public class MainController {
     public ModelAndView searchCourses (@ModelAttribute("query") SearchQuery query) throws JSONException {
         System.out.println("query="+query.getQuery());
         ArrayList<Course> courses = courseraService.getByQuery(query.getQuery());
-        courses.addAll(udacityService.getAllCourses());
+        courses.addAll(udacityService.getByQuery(query.getQuery()));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("courses", courses);
         modelAndView.setViewName("resultPage");
@@ -48,8 +48,8 @@ public class MainController {
     public ModelAndView edx() {
         ArrayList<Course> courses = udacityService.getAllCourses();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("courses", courses);
-        modelAndView.setViewName("resultPage");
+        modelAndView.addObject("queryJsp", new SearchQuery(""));
+        modelAndView.setViewName("index");
         return modelAndView;
     }
 }

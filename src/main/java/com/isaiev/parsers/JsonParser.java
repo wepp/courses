@@ -14,8 +14,6 @@ public abstract class JsonParser {
 
 
     public ArrayList<Course> parseJson (String source) {
-        System.out.println("start parse");
-        long start = System.currentTimeMillis();
         ArrayList<Course> courses = null;
         JSONObject obj = null;
         try {
@@ -28,9 +26,6 @@ public abstract class JsonParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        long end = System.currentTimeMillis();
-        System.out.println((end-start)/1000);
-        System.out.println("end parse");
         return courses;
     }
 
