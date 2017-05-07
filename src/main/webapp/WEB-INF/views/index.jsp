@@ -4,10 +4,14 @@
 <html>
 
 <head>
+
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
+
     <title>Index Page</title>
 </head>
 
 <body>
+<h1>TEST</h1>
 ${queryJsp.query}
 <spring:form method="post"  modelAttribute="queryJsp" action="search">
 

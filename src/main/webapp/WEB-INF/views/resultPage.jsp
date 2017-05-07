@@ -14,9 +14,9 @@
 <body>
 Results:</br>
 <c:forEach items="${courses}" var="course">
-    ${course.name}
+    <a href="${course.link}">${course.name}</a>
     <br/>
-    <a href="${course.link}">${course.link}</a>
+    <a href="${course.photoUrl}">${course.link}</a>
     <br/>
 </c:forEach>
 <br/>
