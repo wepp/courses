@@ -3,6 +3,7 @@ package com.isaiev.controllers;
 import com.isaiev.entities.Course;
 import com.isaiev.entities.SearchQuery;
 import com.isaiev.services.ICourseraService;
+import com.isaiev.services.impl.EdxService;
 import com.isaiev.services.impl.UdacityService;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class MainController {
     ICourseraService courseraService;
     @Autowired
     UdacityService udacityService;
+    @Autowired
+    EdxService edxService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
@@ -45,8 +48,17 @@ public class MainController {
     }
 
     @RequestMapping(value = "/udacity", method = RequestMethod.GET)
-    public ModelAndView edx() {
+    public ModelAndView udacity() {
         ArrayList<Course> courses = udacityService.getAllCourses();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("queryJsp", new SearchQuery(""));
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/edx", method = RequestMethod.GET)
+    public ModelAndView edx() {
+        edxService.getAllCourses ();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("queryJsp", new SearchQuery(""));
         modelAndView.setViewName("index");
